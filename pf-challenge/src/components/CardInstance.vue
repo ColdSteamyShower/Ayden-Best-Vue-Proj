@@ -5,9 +5,15 @@
           <img class="front-icon" src="../assets/bone.svg"/>
         </div>
         <div class="back">
-          <header>{{num}}</header>
-          <div id="card-body">Body</div>
-          <footer>Footer</footer>
+          <header>
+            <span>Dog #{{num}}</span>
+          </header>
+          <div id="card-body">
+            <img class="dog-image" :src="dog"/>
+          </div>
+          <header>
+            <span>Breed: {{breed}}</span>
+          </header>
         </div>
       </div>
     </div>
@@ -18,7 +24,10 @@
   export default {
     name: 'CardInstance',
     data() {
-      return {isClicked: false}
+      return {
+        isClicked: false,
+        breed: ""
+      }
     },
     props: {
       dog: String,
@@ -28,6 +37,9 @@
       toggleClicked: function() {
         this.isClicked = !this.isClicked;
       }
+    },
+    created() {
+      this.breed = this.dog.split("/")[4]
     }
   }
   </script>
@@ -90,9 +102,24 @@
       background-color: lightblue;
       height: 25%;
       width: 100%;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    span {
+      font-weight:600;
+      color: rgb(75, 75, 75)
     }
 
     #card-body {
       height: 50%;
+      overflow: hidden;
+    }
+
+    .dog-image {
+      object-fit:fill;
+      width: 100%
     }
   </style>

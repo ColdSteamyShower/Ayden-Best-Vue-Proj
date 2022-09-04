@@ -1,7 +1,7 @@
 <template>
   <img alt="Vue logo" src="./assets/logo.png">
   <div id="card-container">
-      <cardInstance  v-for="(dog, index) in dogs.message" :key="index" :url="dog" :num="index+1"/>
+      <cardInstance  v-for="(dog, index) in dogs.message" :key="index" :dog="dog" :num="index+1"/>
   </div>
 </template>
 
@@ -22,13 +22,6 @@ export default {
     fetch("https://dog.ceo/api/breeds/image/random/10")
     .then(response => response.json())
     .then(data => (this.dogs = data));
-  },
-  watch: {
-    dogs: {
-      handler(newData){
-      for (let url in newData.message)
-        console.log(newData.message[url])}
-    }
   }
 }
 </script>
