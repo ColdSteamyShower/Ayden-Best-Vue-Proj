@@ -5,7 +5,7 @@
           <img class="front-icon" src="../assets/bone.svg"/>
         </div>
         <div class="back">
-          <header>Header</header>
+          <header>{{num}}</header>
           <div id="card-body">Body</div>
           <footer>Footer</footer>
         </div>
@@ -19,6 +19,10 @@
     name: 'CardInstance',
     data() {
       return {isClicked: false}
+    },
+    props: {
+      dog: String,
+      num: Number
     },
     methods: {
       toggleClicked: function() {

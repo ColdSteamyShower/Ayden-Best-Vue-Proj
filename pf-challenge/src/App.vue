@@ -1,17 +1,7 @@
 <template>
   <img alt="Vue logo" src="./assets/logo.png">
   <div id="card-container">
-    <CardInstance/>
-    <CardInstance/>
-    <CardInstance/>
-    <CardInstance/>
-    <CardInstance/>
-
-    <CardInstance/>
-    <CardInstance/>
-    <CardInstance/>
-    <CardInstance/>
-    <CardInstance/>
+      <cardInstance  v-for="(dog, index) in dogs.message" :key="index" :url="dog" :num="index+1"/>
   </div>
 </template>
 
@@ -25,12 +15,19 @@ export default {
   },
   data() {
     return {
-      dogs: fetch("https://dog.ceo/api/breeds/image/random/10")
+      dogs: {}
     }
   },
+  async created() {
+    fetch("https://dog.ceo/api/breeds/image/random/10")
+    .then(response => response.json())
+    .then(data => (this.dogs = data));
+  },
   watch: {
-    dogs: function(newData) {
-      console.log("New data for dogs: ", newData)
+    dogs: {
+      handler(newData){
+      for (let url in newData.message)
+        console.log(newData.message[url])}
     }
   }
 }
@@ -55,9 +52,7 @@ export default {
   margin: 0px 10% 0px 10%;
   height: 70vh;
   width: 80%;
-  position: absolute;
   bottom: 5%;
-  left: 0px;
   display: flex;
   flex-flow: row wrap;
   justify-content: space-between
